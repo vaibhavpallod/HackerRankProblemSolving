@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Complete the isValid function below.
+string isValid(string s) {
+    unordered_map<char,int> m;
+    map<int,int> m2;
+    for(long i=0;i<s.length();i++){
+        m[s[i]]++;       
+    }
+    
+    for(auto itr =m.begin();itr!=m.end();itr++){
+        
+        m2[itr->second]++;
+        
+    }
+    auto itr =m2.begin();
+    if(m2.size()==1)
+    return "YES";
+    else if(m2.size()<=2 ){
+        int secondary =0;
+         for(auto itr2 =m2.begin();itr2!=m2.end();itr2++){
+            if(itr2->second>1)
+            secondary++; 
+         }
+        if(secondary>1)
+        return "NO";
+        else{
+            int prev=-1;
+            for(auto itr2 =m2.begin();itr2!=m2.end();itr2++){
+                cout<<itr2->first<<endl;
+                if( (itr2->first == 1 &&itr2->second == 1 ) || (prev!=-1 && (itr2->first-prev == 1 || prev-itr2->first == 1 )))
+                return "YES";
+                prev=itr2->first;
+            }
+        return "NO";
+        }
+    }
+    else{
+    return "NO";
+    }
+    
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string s;
+    getline(cin, s);
+
+    string result = isValid(s);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
