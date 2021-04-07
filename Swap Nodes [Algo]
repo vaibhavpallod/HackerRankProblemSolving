@@ -1,0 +1,115 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+/*
+ * Complete the swapNodes function below.
+ */
+ 
+ pair<int,int> getHeight(vector<vector<int>> indexes,int queries){
+     int lvl=1;
+     int nodes=1,nextNodes=1,i=0;
+     
+     while(i!=indexes.size()){
+         nodes=nextNodes;
+         nextNodes=0;
+         
+         if(lvl==queries)
+         return make_pair(i,nodes);
+        
+         while(nodes--){
+             
+            for(int j=0;j<indexes[i].size();j++){
+                if(indexes[i][j]!=-1)
+                nextNodes++; 
+                
+            }
+               
+            i++;
+         }
+         lvl++;
+     }
+     
+     
+     
+   return make_pair(-1,-1);  
+ }
+ 
+vector<vector<int>> swapNodes(vector<vector<int>> indexes, vector<int> queries) {
+    /*
+     * Write your code here.
+     */
+     vector<vector<int>> vec;
+     for(int i=0;i<queries.size();i++){
+         
+         pair<int,int> p=getHeight(indexes,queries[i]);
+        //  cout<<p.first<<" "<<p.second;
+         if(p.first !=-1 && p.second!=-1)
+         for(int j=p.first;j<p.first+p.second;j++){
+             s[j][1]);
+             
+         }
+        //  cout<<endl;
+         
+         
+     }
+     
+     
+return indexes;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int n;
+    cin >> n;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    vector<vector<int>> indexes(n);
+    for (int indexes_row_itr = 0; indexes_row_itr < n; indexes_row_itr++) {
+        indexes[indexes_row_itr].resize(2);
+
+        for (int indexes_column_itr = 0; indexes_column_itr < 2; indexes_column_itr++) {
+            cin >> indexes[indexes_row_itr][indexes_column_itr];
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    int queries_count;
+    cin >> queries_count;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    vector<int> queries(queries_count);
+
+    for (int queries_itr = 0; queries_itr < queries_count; queries_itr++) {
+        int queries_item;
+        cin >> queries_item;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        queries[queries_itr] = queries_item;
+    }
+
+    vector<vector<int>> result = swapNodes(indexes, queries);
+
+    for (int result_row_itr = 0; result_row_itr < result.size(); result_row_itr++) {
+        for (int result_column_itr = 0; result_column_itr < result[result_row_itr].size(); result_column_itr++) {
+            fout << result[result_row_itr][result_column_itr];
+
+            if (result_column_itr != result[result_row_itr].size() - 1) {
+                fout << " ";
+            }
+        }
+
+        if (result_row_itr != result.size() - 1) {
+            fout << "\n";
+        }
+    }
+
+    fout << "\n";
+
+    fout.close();
+
+    return 0;
+}
